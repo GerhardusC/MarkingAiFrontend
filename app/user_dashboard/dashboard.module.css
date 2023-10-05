@@ -1,0 +1,215 @@
+.mainContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 280px;
+  background-color: #f7f7f8;
+  padding: 0 20px;
+  min-height: 100vh;
+}
+
+.navigationTitle {
+  display: flex;
+  gap: 5px;
+}
+
+.navigationContainer {
+  min-width: 280px;
+  position: fixed;
+  left: 0;
+  height: 100%;
+  padding: 20px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .mainContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 0;
+    width: 100%;
+  }
+  .navigationContainer {
+    position: relative;
+    left: 0;
+    height: 100%;
+    padding: 20px;
+    width: auto;
+  }
+}
+
+.navigationList {
+  list-style: none;
+  margin: 20px;
+  padding: 0;
+  font-size: large;
+}
+
+.navigationList a {
+  text-decoration: none;
+}
+
+.navigationItem {
+  display: flex;
+  gap: 15px;
+}
+
+.navigationItem p {
+  color: gray;
+}
+
+.newAssessmentButton {
+  font-size: large;
+  color: white;
+  border: none;
+  margin: auto;
+  background-color: #1382da;
+  text-decoration: none;
+  padding: 15px;
+  width: 80%;
+  border-radius: 1rem;
+  transition: transform 0.1s ease;
+  cursor: pointer;
+}
+
+.newAssessmentButton:hover {
+  transform: scale(1.05);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list {
+  font-weight: bold;
+  display: grid;
+  column-gap: 20px;
+  grid-template-columns: 1fr 3fr 3fr 5fr 2fr 4fr 1fr;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 10px 0;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.listHeader {
+  font-weight: normal;
+  background: none;
+}
+
+.listHeader div {
+  display: flex;
+  gap: 5px;
+}
+
+.list div {
+  display: flex;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.shareButton {
+  padding: 8px 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: solid black 2px;
+  font-size: large;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.1s ease,
+    border-color 0.1s ease;
+}
+
+.shareButton:hover {
+  border-color: rgb(67, 67, 67);
+  background-color: #d8d8d8;
+  transform: scale(1.05);
+}
+
+.publishButton {
+  padding: 10px 30px;
+  border-radius: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  font-size: large;
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s ease, background-color 0.1s ease,
+    border-color 0.1s ease;
+}
+
+.publishButton:hover {
+  transform: scale(1.05);
+}
+
+.userInputsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px 0px 20px 20px;
+}
+
+.userInputsContainer select {
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  color: #030229;
+  font-size: large;
+  font: inherit;
+}
+
+.userInputsContainer input {
+  width: 287px;
+  height: 20px;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+}
+
+.userInputsContainer button {
+  position: relative;
+  right: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.userInputsContainer button:hover {
+  transform: scale(1.05);
+}
+
+.userInputsContainer button:active,
+.userInputsContainer button:focus {
+  outline: 1px solid blue;
+  border-radius: 5px;
+}
+
+.statusTag {
+  border-radius: 2rem;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.readyTag {
+  color: #f29339;
+  background-color: #f2923919;
+}
+
+.reviewedTag {
+  background-color: #1380da32;
+  color: #1382da;
+}
+
+.queriedTag {
+  color: #d11a2a;
+  background-color: #d11a292a;
+}
