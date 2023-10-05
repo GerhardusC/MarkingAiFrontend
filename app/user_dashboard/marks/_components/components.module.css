@@ -1,0 +1,29 @@
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.203);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.modalContainer {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.modalContainer h1 {
+  color: #030229;
+}
+
+.modalContainer h2 {
+  font-size: large;
+  color: #030229;
+}

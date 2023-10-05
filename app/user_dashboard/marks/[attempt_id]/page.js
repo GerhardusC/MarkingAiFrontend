@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styles from "./attempts.module.css";
+import EditMarkModal from "../_components/editMarkModal";
 
 const GradesView = ({ params }) => {
   const questions = [
@@ -145,6 +146,7 @@ const GradesView = ({ params }) => {
           </details>
         </div>
       </div>
+      <EditMarkModal />
     </div>
   );
 };
