@@ -1,9 +1,11 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./attempts.module.css";
-import EditMarkModal from "../_components/editMarkModal";
+import EditMarkModal from "../_components/EditMarkModal";
 
 const GradesView = ({ params }) => {
+  const [editingQuestion, setEditingQuestion] = useState(false);
   const questions = [
     { name: "Question 1", description: "Define photosynthesis.", marks: 2 },
     {
@@ -108,7 +110,12 @@ const GradesView = ({ params }) => {
         <div className={styles.gradeContainer}>
           <div className={styles.headingContainer}>
             <h2 className={styles.gradingColumnHeading}>Grading</h2>
-            <h2 className={styles.editText}>Edit</h2>
+            <h2
+              className={styles.editText}
+              onClick={() => setEditingQuestion((prev) => !prev)}
+            >
+              Edit
+            </h2>
           </div>
           <h5 className={styles.detailedQuestionName2}>Question 3</h5>
           <div className={styles.marksContainer}>
@@ -142,11 +149,18 @@ const GradesView = ({ params }) => {
               <span>AI Justification for mark</span>
               <span>v</span>
             </summary>
-            <div></div>
+            <div>You just deserve it...</div>
           </details>
         </div>
       </div>
-      <EditMarkModal />
+      {editingQuestion ? (
+        <EditMarkModal
+          editingQuestion={editingQuestion}
+          setEditingQuestion={setEditingQuestion}
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

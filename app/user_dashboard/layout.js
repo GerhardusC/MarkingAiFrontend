@@ -1,5 +1,6 @@
 import styles from "./dashboard.module.css";
 import Link from "next/link";
+import ProfileIcon from "./marks/_components/ProfileIcon";
 
 const DashboardLayout = ({ children }) => {
   return (
@@ -33,6 +34,7 @@ const DashboardLayout = ({ children }) => {
         </button>
       </nav>
       {children}
+      <ProfileIcon />
     </section>
   );
 };

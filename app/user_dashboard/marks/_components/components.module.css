@@ -14,16 +14,104 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  gap: 20px;
   align-items: center;
-  padding: 20px;
+  padding: 20px 80px;
   border-radius: 15px;
 }
 
 .modalContainer h1 {
   color: #030229;
+  font-size: xx-large;
 }
 
 .modalContainer h2 {
   font-size: large;
   color: #030229;
+  margin: 0;
+}
+
+.modalContainer input {
+  width: 330px;
+  height: 30px;
+  padding: 20px;
+  border: none;
+  background-color: #f7f7f8;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.modalContainer textarea {
+  width: 330px;
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 155px;
+  max-height: fit-content;
+  border: none;
+  background-color: #f7f7f8;
+  font: inherit;
+}
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonContainer button {
+  width: 93px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.buttonContainer button:hover {
+  transform: scale(1.05);
+}
+
+.saveButton {
+  border: none;
+  background-color: #1382da;
+  color: #fff;
+}
+
+.saveButton:hover {
+  background-color: rgb(24, 142, 238);
+}
+
+.cancelButton {
+  color: #1382da;
+  border: 1px solid #605bff35;
+  background-color: #fff;
+}
+
+.cancelButton:hover {
+  background-color: rgb(241, 241, 241);
+}
+
+.profileIcon {
+  position: fixed;
+  bottom: 20px;
+  left: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.profileIcon p {
+  margin: 0;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 12;
+}
+
+.accountStatus {
+  opacity: 0.5;
+  font-size: 10px;
 }
