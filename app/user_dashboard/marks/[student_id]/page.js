@@ -1,36 +1,42 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./attempts.module.css";
 import EditMarkModal from "../_components/EditMarkModal";
 
-const GradesView = ({ params }) => {
+const GradesView = ({ params, searchParams }) => {
   const [editingQuestion, setEditingQuestion] = useState(false);
-  const questions = [
-    { name: "Question 1", description: "Define photosynthesis.", marks: 2 },
-    {
-      name: "Question 2",
-      description: "Explain the process of mitosis.",
-      marks: 2,
-    },
-    { name: "Question 3", description: "What is an enzyme?", marks: 3 },
-    {
-      name: "Question 4",
-      description: "What is the function of the circulatory system?",
-      marks: 1,
-    },
-    {
-      name: "Question 5",
-      description: "Differentiate between prokaryotic and eukaryotic cells.",
-      marks: 4,
-    },
-    {
-      name: "Question 6",
-      description: "Describe the role of DNA in inheritence.",
-      marks: 4,
-    },
-    { name: "Question 7", description: "Define protons.", marks: 6 },
-  ];
+  const [fetching, setFetching] = useState(false);
+  const [testAttempt, setTestAttempt] = useState([]);
+  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
+  const [totalMarks, setTotalMarks] = useState(0);
+  const [studentMarks, setStudentMarks] = useState(0);
+
+  const getTestAttempt = async () => {
+    const res = await fetch(
+      `http://localhost:3001/get_data/get_test_attempt/?studentId=${params.student_id}&testId=${searchParams.testId}`
+    );
+    const attempts = await res.json();
+    setTestAttempt(attempts);
+    let totalMarks = 0;
+    let studentMarks = 0;
+    for (let i = 0; i < attempts.length; i++) {
+      totalMarks += attempts[i].question.totalMarks;
+      studentMarks += attempts[i].mark;
+    }
+    setTotalMarks(totalMarks);
+    setStudentMarks(studentMarks);
+    console.log(attempts);
+  };
+
+  useEffect(() => {
+    if (!fetching) {
+      setFetching(true);
+      getTestAttempt();
+    }
+    return setFetching(false);
+  }, []);
+
   return (
     <div>
       <div className={styles.gradeViewContainer}>
@@ -39,9 +45,11 @@ const GradesView = ({ params }) => {
           <div className={styles.backbutton}>
             <Link href="/user_dashboard/marks">&#8592;</Link>
           </div>
-          <h1>Aurora Gaur</h1>
+          <h1>{testAttempt[0]?.student.studentName}</h1>
         </div>
-        <h1>45/50</h1>
+        <h1>
+          {studentMarks}/{totalMarks}
+        </h1>
         <div className={styles.reviewStatus}>Review complete</div>
         {/* Row 2 */}
         <div className={styles.questionsContainer}>
@@ -51,15 +59,25 @@ const GradesView = ({ params }) => {
             <input type="text" placeholder="search" />
           </div>
           {/* Questions */}
-          {questions.map((question, index) => {
+          {testAttempt.map((attempt, index) => {
             return (
-              <div className={styles.questionContainer} key={index}>
+              <div
+                className={
+                  selectedQuestionIndex === index
+                    ? styles.questionContainerSelected
+                    : styles.questionContainer
+                }
+                key={index}
+                onClick={() => setSelectedQuestionIndex(index)}
+              >
                 <div className={styles.questionNameContainer}>
-                  <p className={styles.questionName}>{question.name}</p>
-                  <p className={styles.questionMarks}>{question.marks} marks</p>
+                  <p className={styles.questionName}>Question {index + 1}</p>
+                  <p className={styles.questionMarks}>
+                    {attempt.question.totalMarks} marks
+                  </p>
                 </div>
                 <p className={styles.questionDescription}>
-                  {question.description}
+                  {attempt.question.questionText}
                 </p>
               </div>
             );
@@ -67,9 +85,15 @@ const GradesView = ({ params }) => {
         </div>
         {/* Selected question */}
         <div className={styles.questionDetailsContainer}>
-          <h2 className={styles.testName}>Grade 10 Biology Test Term 1</h2>
-          <h5 className={styles.detailedQuestionName}>Question 3</h5>
-          <h1 className={styles.questionText}>What is an enzyme?</h1>
+          <h2 className={styles.testName}>
+            {testAttempt[selectedQuestionIndex]?.test.testName}
+          </h2>
+          <h5 className={styles.detailedQuestionName}>
+            Question {selectedQuestionIndex + 1}
+          </h5>
+          <h1 className={styles.questionText}>
+            {testAttempt[selectedQuestionIndex]?.question.questionText}
+          </h1>
           <div className={styles.summariesContainer}>
             <details>
               <summary>
@@ -77,14 +101,7 @@ const GradesView = ({ params }) => {
                 <span className={styles.summaryDownarrow}>v</span>
               </summary>
               <div>
-                <p>
-                  An enzyme is a type of protein that speeds up chemical
-                  reactions in living organisms. It works by attaching to
-                  specific molecules, called substrates, and helping them change
-                  into different molecules. Enzymes make these reactions happen
-                  faster by lowering the energy needed for them. This helps with
-                  vital processes like digestion and energy production in cells.
-                </p>
+                <p>{testAttempt[selectedQuestionIndex]?.studentAnswer}</p>
               </div>
             </details>
             <details>
@@ -93,7 +110,9 @@ const GradesView = ({ params }) => {
                 <span className={styles.summaryDownarrow}>v</span>
               </summary>
               <div>
-                <p></p>
+                <p>
+                  {testAttempt[selectedQuestionIndex]?.question.markingGuide}
+                </p>
               </div>
             </details>
             <details>
@@ -102,7 +121,9 @@ const GradesView = ({ params }) => {
                 <span className={styles.summaryDownarrow}>v</span>
               </summary>
               <div>
-                <p></p>
+                <p>
+                  {testAttempt[selectedQuestionIndex]?.question.modelAnswer}
+                </p>
               </div>
             </details>
           </div>
@@ -117,9 +138,14 @@ const GradesView = ({ params }) => {
               Edit
             </h2>
           </div>
-          <h5 className={styles.detailedQuestionName2}>Question 3</h5>
+          <h5 className={styles.detailedQuestionName2}>
+            Question {selectedQuestionIndex + 1}
+          </h5>
           <div className={styles.marksContainer}>
-            <h1>2.0 / 3.0</h1>
+            <h1>
+              {testAttempt[selectedQuestionIndex]?.mark} /{" "}
+              {testAttempt[selectedQuestionIndex]?.question.totalMarks}
+            </h1>
             <p>Marks</p>
           </div>
           <details>
@@ -128,20 +154,7 @@ const GradesView = ({ params }) => {
               <span>v</span>
             </summary>
             <div>
-              <p>
-                Great job explaining enzymes and their function! You've clearly
-                described what enzymes are and how they speed up reactions in
-                living organisms. Your mention of enzymes attaching to specific
-                molecules (substrates) and helping them change is spot on.
-              </p>
-              <p>
-                To make your answer even stronger and earn that extra mark,
-                consider adding a bit more detail about how enzymes make
-                reactions happen faster. You could talk about how they create a
-                special environment that encourages chemical changes, or mention
-                their role in breaking down complex substances into simpler
-                ones.
-              </p>
+              <p>{testAttempt[selectedQuestionIndex]?.feedback}</p>
             </div>
           </details>
           <details>
@@ -149,7 +162,7 @@ const GradesView = ({ params }) => {
               <span>AI Justification for mark</span>
               <span>v</span>
             </summary>
-            <div>You just deserve it...</div>
+            <div>{testAttempt[selectedQuestionIndex]?.justification}</div>
           </details>
         </div>
       </div>

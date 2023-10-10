@@ -47,11 +47,28 @@
 .questionsContainer {
   background-color: #fff;
   border-radius: 15px;
+  border-bottom: #00000018 solid 2px;
 }
 
-.questionsContainer h2 {
+.questionContainer {
   padding: 0 20px;
+  transition: background-color 0.1s ease;
+  cursor: pointer;
 }
+
+.questionContainerSelected {
+  background-color: #e1e1e1;
+  padding: 0 20px;
+  transition: background-color 0.1s ease;
+  cursor: pointer;
+}
+
+/* .questionContainerSelected {
+  background-color: #e1e1e1;
+  border-radius: 15px;
+  padding: 20px;
+  border-bottom: #00000018 solid 2px;
+} */
 
 .searchBar {
   position: relative;
@@ -76,11 +93,6 @@
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
-}
-
-.questionContainer {
-  padding: 20px;
-  border-bottom: #00000018 solid 2px;
 }
 
 .questionNameContainer {

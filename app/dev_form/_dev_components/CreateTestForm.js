@@ -7,6 +7,7 @@ const CreateTestForm = () => {
   const [testName, setTestName] = useState("");
   const [marks, setMarks] = useState(0);
   const [fetching, setFetching] = useState(false);
+
   useEffect(() => {
     const getCurrentQuestions = async () => {
       const res = await fetch("http://localhost:3001/get_data/get_questions");
