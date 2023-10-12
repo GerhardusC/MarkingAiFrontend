@@ -29,9 +29,9 @@ const DashboardLayout = ({ children }) => {
             </li>
           </Link>
         </ul>
-        <button className={styles.newAssessmentButton}>
+        <Link href="/dev_form" className={styles.newAssessmentButton}>
           + Create assessment
-        </button>
+        </Link>
       </nav>
       {children}
       <ProfileIcon />

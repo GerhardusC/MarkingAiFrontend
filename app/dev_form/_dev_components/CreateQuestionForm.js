@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import styles from "./devComponents.module.css";
 
 const CreateQuestionForm = () => {
   const [totalMarks, setTotalMarks] = useState(0);
@@ -27,49 +28,73 @@ const CreateQuestionForm = () => {
         }
       );
       const response = await res.json();
-      console.log(response);
+      alert(response.message);
     } catch (err) {
       console.log(err.message);
     }
   };
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit();
-      }}
-    >
-      <input
-        onChange={(e) => setTotalMarks(e.target.value)}
-        placeholder="total marks"
-        type="number"
-        value={totalMarks}
-      />
-      <input
-        onChange={(e) => setQuestionText(e.target.value)}
-        type="text"
-        placeholder="question text"
-        value={questionText}
-      />
-      <input
-        onChange={(e) => setQuestionType(e.target.value)}
-        type="text"
-        placeholder="question type"
-        value={questionType}
-      />
-      <input
-        onChange={(e) => setMarkingGuide(e.target.value)}
-        type="text"
-        placeholder="marking guide"
-        value={markingGuide}
-      />
-      <input
-        onChange={(e) => setModelAnswer(e.target.value)}
-        placeholder="model answer"
-        value={modelAnswer}
-      />
-      <button type="submit">Add question</button>
-    </form>
+    <>
+      <h1>Create question:</h1>
+      <form
+        className={styles.form}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
+        <div className={styles.formItem}>
+          <label>Total marks: </label>
+          <input
+            className={styles.textIn}
+            onChange={(e) => setTotalMarks(e.target.value)}
+            placeholder="total marks"
+            type="number"
+            value={totalMarks}
+          />
+        </div>
+        <div className={styles.formItem}>
+          <label>Question text: </label>
+          <input
+            className={styles.textIn}
+            onChange={(e) => setQuestionText(e.target.value)}
+            type="text"
+            placeholder="question text"
+            value={questionText}
+          />
+        </div>
+        <div className={styles.formItem}>
+          <label>Question type: </label>
+          <input
+            className={styles.textIn}
+            onChange={(e) => setQuestionType(e.target.value)}
+            type="text"
+            placeholder="question type"
+            value={questionType}
+          />
+        </div>
+        <div className={styles.formItem}>
+          <label>Marking guide: </label>
+          <input
+            className={styles.textIn}
+            onChange={(e) => setMarkingGuide(e.target.value)}
+            type="text"
+            placeholder="marking guide"
+            value={markingGuide}
+          />
+        </div>
+        <div className={styles.formItem}>
+          <label>Model answer: </label>
+          <input
+            className={styles.textIn}
+            onChange={(e) => setModelAnswer(e.target.value)}
+            placeholder="model answer"
+            value={modelAnswer}
+          />
+        </div>
+        <button type="submit">Add question</button>
+      </form>
+    </>
   );
 };
 

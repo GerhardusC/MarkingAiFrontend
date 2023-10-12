@@ -53,75 +53,72 @@ const MarksPage = async () => {
   console.log(formattedAttempts);
   // console.log(groupedByTestAndStudent);
   const courses = [
+    "All tests",
     "Grade 10 Physical Science Test Term 1",
     "Grade 10 Physical Science Test Term 2",
     "Grade 11 Physical Science Test Term 1",
     "Grade 11 Physical Science Test Term 2",
-    "Grade 12 Physical Science Test Term 1",
-    "Grade 12 Physical Science Test Term 2",
     "Grade 10 Life Science Test Term 1",
     "Grade 10 Life Science Test Term 2",
     "Grade 11 Life Science Test Term 1",
     "Grade 11 Life Science Test Term 2",
-    "Grade 12 Life Science Test Term 1",
-    "Grade 12 Life Science Test Term 2",
   ];
 
   const studentGrades = [
     {
       studentId: "#876364",
-      name: "Arrora Gaur",
-      email: "aurroragaur@gmail.com",
-      mark: 45,
-      total: 50,
+      studentName: "Arrora Gaur",
+      studentEmail: "aurroragaur@gmail.com",
+      marks: 45,
+      totalMarks: 50,
       status: "Ready to review",
     },
     {
       studentId: "#876364",
-      name: "James Mullican",
-      email: "jamesmullican@gmail.com",
-      mark: 32,
-      total: 50,
+      studentName: "James Mullican",
+      studentEmail: "jamesmullican@gmail.com",
+      marks: 32,
+      totalMarks: 50,
       status: "Ready to review",
     },
     {
       studentId: "#876364",
-      name: "Robert Bacins",
-      email: "robertbacins@gmail.com",
-      mark: 37,
-      total: 50,
+      studentName: "Robert Bacins",
+      studentEmail: "robertbacins@gmail.com",
+      marks: 37,
+      totalMarks: 50,
       status: "Reviewed",
     },
     {
       studentId: "#876364",
-      name: "Bethany Jackson",
-      email: "bethanyjackson@gmail.com",
-      mark: 49,
-      total: 50,
+      studentName: "Bethany Jackson",
+      studentEmail: "bethanyjackson@gmail.com",
+      marks: 49,
+      totalMarks: 50,
       status: "Queried",
     },
     {
       studentId: "#876364",
-      name: "Anne Jacob",
-      email: "annejacob@gmail.com",
-      mark: 21,
-      total: 50,
+      studentName: "Anne Jacob",
+      studentEmail: "annejacob@gmail.com",
+      marks: 21,
+      totalMarks: 50,
       status: "Reviewed",
     },
     {
       studentId: "#876364",
-      name: "Bethany Jackson",
-      email: "bethanyjackson@gmail.com",
-      mark: 45,
-      total: 50,
+      studentName: "Bethany Jackson",
+      studentEmail: "bethanyjackson@gmail.com",
+      marks: 45,
+      totalMarks: 50,
       status: "Ready to review",
     },
     {
       studentId: "#876364",
-      name: "Arrora Gaur",
-      email: "aurroragaur@gmail.com",
-      mark: 45,
-      total: 50,
+      studentName: "Arrora Gaur",
+      studentEmail: "aurroragaur@gmail.com",
+      marks: 45,
+      totalMarks: 50,
       status: "Reviewed",
     },
   ];
@@ -179,11 +176,17 @@ const MarksPage = async () => {
           </div>
         </li>
         {/* Table content */}
-        {studentGrades.map((studentGrade, index) => {
-          return <GradeListItem {...studentGrade} key={index} />;
+        {formattedAttempts.map((attempt, index) => {
+          const statuses = ["Ready to review", "Reviewed", "Queried"];
+          return (
+            <GradeListItem
+              {...attempt}
+              status={statuses[index % 3]}
+              key={index}
+            />
+          );
         })}
       </ul>
-      {JSON.stringify(groupedByTest, "\t", "\n")}
     </div>
   );
 };

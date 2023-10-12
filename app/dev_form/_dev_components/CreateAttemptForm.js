@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import styles from "./devComponents.module.css";
 
 const CreateAttemptForm = () => {
   const [questions, setQuestions] = useState([]);
@@ -38,8 +39,8 @@ const CreateAttemptForm = () => {
     });
     const response = await res.json();
     setFetching(false);
+    alert("Attempt submitted");
     setServerResponse(response);
-    console.log(response);
   };
 
   useEffect(() => {
@@ -52,64 +53,75 @@ const CreateAttemptForm = () => {
 
   return (
     <>
+      <h1>Create attempt:</h1>
       <form
+        className={styles.form}
         onSubmit={(e) => {
           e.preventDefault();
           attemptQuestion();
         }}
       >
-        <select
-          onChange={(e) => {
-            setSelectedQuestion(e.target.value);
-          }}
-        >
-          <option value="">[Select question]</option>
-          {questions.map((question, index) => {
-            return (
-              <option value={question._id} key={index}>
-                {question.questionText}
-              </option>
-            );
-          })}
-        </select>
-
-        <select
-          onChange={(e) => {
-            setSelectedStudent(e.target.value);
-          }}
-        >
-          <option value="">[Select student]</option>
-          {students.map((student, index) => {
-            return (
-              <option value={student._id} key={index}>
-                {student.studentName}: {student.studentId}
-              </option>
-            );
-          })}
-        </select>
-
-        <select
-          onChange={(e) => {
-            setSelectedTest(e.target.value);
-          }}
-        >
-          <option value="">[Select test]</option>
-          {tests.map((test, index) => {
-            return (
-              <option value={test._id} key={index}>
-                {test.testName}
-              </option>
-            );
-          })}
-        </select>
-
-        <textarea
-          placeholder="student answer text"
-          value={studentAnswer}
-          onChange={(e) => {
-            setStudentAnswer(e.target.value);
-          }}
-        />
+        <div className={styles.formItem}>
+          <label>Select question:</label>
+          <select
+            onChange={(e) => {
+              setSelectedQuestion(e.target.value);
+            }}
+          >
+            <option value="">[Select question]</option>
+            {questions.map((question, index) => {
+              return (
+                <option value={question._id} key={index}>
+                  {question.questionText}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className={styles.formItem}>
+          <label>Select student: </label>
+          <select
+            onChange={(e) => {
+              setSelectedStudent(e.target.value);
+            }}
+          >
+            <option value="">[Select student]</option>
+            {students.map((student, index) => {
+              return (
+                <option value={student._id} key={index}>
+                  {student.studentName}: {student.studentId}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className={styles.formItem}>
+          <label>Select test: </label>
+          <select
+            onChange={(e) => {
+              setSelectedTest(e.target.value);
+            }}
+          >
+            <option value="">[Select test]</option>
+            {tests.map((test, index) => {
+              return (
+                <option value={test._id} key={index}>
+                  {test.testName}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className={styles.formItem}>
+          <label>Student answer: </label>
+          <textarea
+            placeholder="student answer text"
+            value={studentAnswer}
+            onChange={(e) => {
+              setStudentAnswer(e.target.value);
+            }}
+          />
+        </div>
         <button type="submit">Create attempt</button>
       </form>
       {fetching && <div>Loading...</div>}

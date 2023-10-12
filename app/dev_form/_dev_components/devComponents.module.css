@@ -1,0 +1,47 @@
+.form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 800px;
+}
+
+.form select {
+  width: 400px;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form textarea {
+  width: 400px;
+  height: 100px;
+}
+
+.textIn {
+  width: 400px;
+  height: 30px;
+  padding: 5px;
+}
+
+.formItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkboxOption {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.form button {
+  width: 300px;
+  border: none;
+  margin: auto;
+  padding: 20px;
+  font-size: large;
+  border-radius: 5px;
+  cursor: pointer;
+}

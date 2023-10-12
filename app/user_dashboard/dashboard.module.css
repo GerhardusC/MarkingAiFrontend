@@ -90,6 +90,10 @@
   align-items: center;
 }
 
+.list a {
+  text-decoration: none;
+}
+
 .listHeader {
   font-weight: normal;
   background: none;
